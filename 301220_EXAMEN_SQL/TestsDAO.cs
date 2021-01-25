@@ -98,11 +98,14 @@ namespace _301220_EXAMEN_SQL
                         {
                             while (reader.Read())
                             {
+                                bool isPassed = false;
+                                if (Convert.ToInt32(reader["isPassed"]) == 1)
+                                    isPassed = true;
                                 Tests t = new Tests
                                 {
                                     Id = (long)reader["id"],
                                     Car_Id = (long)reader["car_id"],
-                                    IsPassed = (bool)reader["isPassed"],
+                                    IsPassed = isPassed,
                                     Date = Convert.ToDateTime(reader["date"])
                                 };
                                 allTests.Add(t);
