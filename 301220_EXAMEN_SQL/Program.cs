@@ -30,10 +30,12 @@ namespace _301220_EXAMEN_SQL
 
             _30122020_EXAMEN_SQLAppConfig.GetOpenConnection();
 
-                //test.AddTests(test1);
-                test.GetAllTests();
-                //test.UpdateTests(1); */ 
-                //test.GetAllTestsWithCars();       
+              //test.AddTests(test1);
+                //test.GetAllTests();
+            //test.UpdateTests(1); 
+            test.GetAllTestsWithCars(); 
+
+            Console.ReadKey();
             
             _30122020_EXAMEN_SQLAppConfig._log.Info("******************** System shutdown");
         }

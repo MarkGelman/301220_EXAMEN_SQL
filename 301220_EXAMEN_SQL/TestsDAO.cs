@@ -42,6 +42,7 @@ namespace _301220_EXAMEN_SQL
             {
                 using (SQLiteConnection connection = new SQLiteConnection(_30122020_EXAMEN_SQLAppConfig.ConnectionString))
                 {
+                    List<Tests> allTests = new List<Tests>();
                     connection.Open();
                     _query = $"SELECT t.isPassed,t.date,c.Manufacturer,c.Model,c.Year FROM tests t JOIN cars c ON c.id = t.car_id"; 
                          
@@ -49,6 +50,9 @@ namespace _301220_EXAMEN_SQL
                     {
                         using (SQLiteDataReader reader = command.ExecuteReader())
                         {
+                            bool isPassed = false;
+                            if (Convert.ToInt32(reader["t.isPassed"]) == 1)
+                                isPassed = true;
                             int i = 0;
                             while (reader.Read())
                             {
@@ -58,10 +62,9 @@ namespace _301220_EXAMEN_SQL
                                     Manufacturer = (string)reader["c.manufacturer"],
                                     Model = (string)reader["c.model"],
                                     Year = (int)reader["c.year"],
-                                    IsPassed = (bool)reader["t.isPassed"],
+                                    IsPassed = isPassed,
                                     Date = Convert.ToDateTime(reader["t.date"])
                                 };
-
                                 Console.WriteLine($"{Cars_With_Tests}");
                             }
 
@@ -153,11 +156,11 @@ namespace _301220_EXAMEN_SQL
             return 0;
         }
 
-        void PrintAll(List<Tests> allCars, string name_function)
+        void PrintAll(List<Tests> allTests, string name_function)
         {
             Console.WriteLine($"                ******** {name_function}*********");
             Console.WriteLine();
-            allCars.ForEach(c => Console.WriteLine($"{c}"));
+            allTests.ForEach(c => Console.WriteLine($"{c}"));
             Console.WriteLine();
             Console.WriteLine();
         }
